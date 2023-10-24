@@ -4,8 +4,11 @@ import io.opentelemetry.javaagent.extension.instrumentation.TypeInstrumentation;
 import io.opentelemetry.javaagent.extension.instrumentation.TypeTransformer;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
+import net.bytebuddy.matcher.ElementMatchers;
 
-public class ProducerSendInstrumentation implements TypeInstrumentation {
+import static net.bytebuddy.matcher.ElementMatchers.named;
+
+public class ProducerSyncSendInstrumentation implements TypeInstrumentation {
     @Override
     public ElementMatcher<TypeDescription> typeMatcher() {
         return null;
@@ -13,6 +16,7 @@ public class ProducerSendInstrumentation implements TypeInstrumentation {
 
     @Override
     public void transform(TypeTransformer typeTransformer) {
-
+        typeTransformer.applyAdviceToMethod(named("publish").and(ElementMatchers.isPublic()),
+                this.getClass().getName() + "$PublishMethodAdvice");
     }
 }
