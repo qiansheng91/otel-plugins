@@ -35,7 +35,7 @@ public class ConsumerTest {
         // properties.put(PropertyKeyConst.MessageModel, PropertyValueConst.BROADCASTING);
 
         Consumer consumer = ONSFactory.createConsumer(properties);
-        consumer.subscribe("ons_plugin", "*", new MessageListener() { //订阅多个Tag。
+        consumer.subscribe("ons-plugin", "TagA", new MessageListener() { //订阅多个Tag。
             public Action consume(Message message, ConsumeContext context) {
                 System.out.println("Receive: " + message);
                 return Action.CommitMessage;

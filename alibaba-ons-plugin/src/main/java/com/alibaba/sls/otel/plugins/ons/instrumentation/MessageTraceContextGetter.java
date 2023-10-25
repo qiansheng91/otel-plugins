@@ -40,7 +40,8 @@ public class MessageTraceContextGetter implements TextMapGetter<Message>, TextMa
   public void set(@Nullable Message message, String s, String s1) {
     Properties userProperties = message.getUserProperties();
     if (userProperties == null) {
-      return;
+      message.setUserProperties(new Properties());
+      userProperties = message.getUserProperties();
     }
 
     userProperties.setProperty(s, s1);

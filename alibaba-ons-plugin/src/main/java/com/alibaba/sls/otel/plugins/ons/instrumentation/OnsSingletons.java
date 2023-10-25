@@ -41,6 +41,7 @@ public class OnsSingletons {
         builder1
             .addAttributesExtractor(MessageAttributeExtractor.INSTANCE)
             .buildProducerInstrumenter(MessageTraceContextGetter.INSTANCE);
+
     CONSUMER_INSTRUMENTER =
         builder2
             .addAttributesExtractor(MessageAttributeExtractor.INSTANCE)

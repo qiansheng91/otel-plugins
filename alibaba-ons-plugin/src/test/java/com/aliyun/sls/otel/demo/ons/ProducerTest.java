@@ -33,7 +33,7 @@ public class ProducerTest {
             Message msg = new Message(
                     // 设置为您在消息队列RocketMQ版控制台上创建的Topic。
                     // 普通消息所属的Topic，切勿使用普通消息的Topic来收发其他类型的消息。
-                    "ons_plugin",
+                    "ons-plugin",
                     // Message Tag可理解为Gmail中的标签，对消息进行再归类，方便Consumer指定过滤条件在消息队列RocketMQ版的服务器过滤。
                     // Tag的具体格式和设置方法，请参见消息过滤。
                     "TagA",
