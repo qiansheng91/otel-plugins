@@ -9,13 +9,13 @@ import java.util.List;
 
 @AutoService(InstrumentationModule.class)
 public class AlibabaONSInstrumentationModule extends InstrumentationModule {
-    public AlibabaONSInstrumentationModule(String mainInstrumentationName, String... additionalInstrumentationNames) {
-        super(mainInstrumentationName, additionalInstrumentationNames);
+    public AlibabaONSInstrumentationModule() {
+        super("", "");
     }
 
     @Override
     public List<TypeInstrumentation> typeInstrumentations() {
         return Arrays.asList(new ProducerAsyncSendInstrumentation(), new ProducerSendIOnewayInstrumentation(),
-                new ProducerSendIOnewayInstrumentation(), new MessageListenerInstrumentation());
+                new ProducerSyncSendInstrumentation(), new MessageListenerInstrumentation());
     }
 }

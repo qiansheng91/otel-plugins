@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Properties;
 
 public class MessageTraceContextGetter implements TextMapGetter<Message>, TextMapSetter<Message> {
+
+    public static final MessageTraceContextGetter INSTANCE = new MessageTraceContextGetter();
+
     @Override
     public Iterable<String> keys(Message message) {
         List<String> keys = new ArrayList<>();
