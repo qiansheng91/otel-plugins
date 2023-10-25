@@ -14,26 +14,26 @@ public class ProducerTest {
          * 如果是在阿里云ECS内网访问，则无需配置，服务端会根据内网VPC信息智能获取。
          */
         // 设置为消息队列RocketMQ版控制台实例详情页的实例用户名。
-        properties.put(PropertyKeyConst.AccessKey, "INSTANCE USER NAME");
+        properties.put(PropertyKeyConst.AccessKey, System.getenv("ACCESS_KEY"));
         // 设置为消息队列RocketMQ版控制台实例详情页的实例密码。
-        properties.put(PropertyKeyConst.SecretKey, "INSTANCE PASSWORD");
+        properties.put(PropertyKeyConst.SecretKey, System.getenv("SECRET_KEY"));
         //注意！！！使用ONS SDK访问RocketMQ 5.x实例时，InstanceID属性不需要设置，否则会导致失败。
 
         // 设置发送超时时间，单位：毫秒。
         properties.setProperty(PropertyKeyConst.SendMsgTimeoutMillis, "3000");
         // 设置为您从消息队列RocketMQ版控制台获取的接入点，类似“rmq-cn-XXXX.rmq.aliyuncs.com:8080”。
         // 注意！！！直接填写控制台提供的域名和端口即可，请勿添加http://或https://前缀标识，也不要用IP解析地址。
-        properties.put(PropertyKeyConst.NAMESRV_ADDR, "ACCESS POINT");
+        properties.put(PropertyKeyConst.NAMESRV_ADDR, System.getenv("NAMESRV_ADDR"));
         Producer producer = ONSFactory.createProducer(properties);
         // 在发送消息前，必须调用start方法来启动Producer，只需调用一次即可。
         producer.start();
 
         // 循环发送消息。
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 5; i++) {
             Message msg = new Message(
                     // 设置为您在消息队列RocketMQ版控制台上创建的Topic。
                     // 普通消息所属的Topic，切勿使用普通消息的Topic来收发其他类型的消息。
-                    "TopicTestMQ",
+                    "ons_plugin",
                     // Message Tag可理解为Gmail中的标签，对消息进行再归类，方便Consumer指定过滤条件在消息队列RocketMQ版的服务器过滤。
                     // Tag的具体格式和设置方法，请参见消息过滤。
                     "TagA",

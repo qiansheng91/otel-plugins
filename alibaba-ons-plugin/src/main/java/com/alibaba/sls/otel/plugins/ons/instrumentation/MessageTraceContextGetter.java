@@ -3,47 +3,46 @@ package com.alibaba.sls.otel.plugins.ons.instrumentation;
 import com.aliyun.openservices.ons.api.Message;
 import io.opentelemetry.context.propagation.TextMapGetter;
 import io.opentelemetry.context.propagation.TextMapSetter;
-
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
+import javax.annotation.Nullable;
 
 public class MessageTraceContextGetter implements TextMapGetter<Message>, TextMapSetter<Message> {
 
-    public static final MessageTraceContextGetter INSTANCE = new MessageTraceContextGetter();
+  public static final MessageTraceContextGetter INSTANCE = new MessageTraceContextGetter();
 
-    @Override
-    public Iterable<String> keys(Message message) {
-        List<String> keys = new ArrayList<>();
+  @Override
+  public Iterable<String> keys(Message message) {
+    List<String> keys = new ArrayList<>();
 
-        Enumeration<Object> userProperties = message.getUserProperties().keys();
-        while (userProperties.hasMoreElements()) {
-            keys.add(String.valueOf(userProperties.nextElement()));
-        }
-
-        return keys;
+    Enumeration<Object> userProperties = message.getUserProperties().keys();
+    while (userProperties.hasMoreElements()) {
+      keys.add(String.valueOf(userProperties.nextElement()));
     }
 
-    @Nullable
-    @Override
-    public String get(@Nullable Message message, String s) {
-        Properties userProperties = message.getUserProperties();
-        if (userProperties == null) {
-            return "";
-        }
+    return keys;
+  }
 
-        return userProperties.getProperty(s, "");
+  @Nullable
+  @Override
+  public String get(@Nullable Message message, String s) {
+    Properties userProperties = message.getUserProperties();
+    if (userProperties == null) {
+      return "";
     }
 
-    @Override
-    public void set(@Nullable Message message, String s, String s1) {
-        Properties userProperties = message.getUserProperties();
-        if (userProperties == null) {
-            return;
-        }
+    return userProperties.getProperty(s, "");
+  }
 
-        userProperties.setProperty(s, s1);
+  @Override
+  public void set(@Nullable Message message, String s, String s1) {
+    Properties userProperties = message.getUserProperties();
+    if (userProperties == null) {
+      return;
     }
+
+    userProperties.setProperty(s, s1);
+  }
 }
