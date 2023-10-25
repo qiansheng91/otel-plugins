@@ -11,6 +11,7 @@
     <url>http://maven.apache.org</url>
     <modules>
         <module>eclipse-paho-java-plugins</module>
+        <module>alibaba-ons-plugin</module>
     </modules>
 
     <properties>
