@@ -14,6 +14,7 @@
         <module>alibaba-ons-plugin</module>
         <module>lark-1.x-plugin</module>
         <module>lark-2.x-plugin</module>
+        <module>alibaba-oss-plugin</module>
     </modules>
 
     <properties>
